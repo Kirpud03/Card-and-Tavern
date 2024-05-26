@@ -14,7 +14,6 @@ public class EnemyAI : MonoBehaviour
     public static bool cardPuted = false;
     private bool _canTake = true;
     private bool _firstMove;
-    private int _move;
     private bool _moveTake;
     private void Start()
     {
@@ -38,7 +37,6 @@ public class EnemyAI : MonoBehaviour
         if (StaticHolder.Move % 2 == 0)
         {
             _moveTake = true;
-            _move = 0;
         }
         _cardOnTable = GameObject.FindGameObjectsWithTag("EnemyCardPlayed");
         _cardOnHand = GameObject.FindGameObjectsWithTag("EnemyCard");
@@ -62,7 +60,6 @@ public class EnemyAI : MonoBehaviour
                             _cardOnHand[i].GetComponent<EnemyCard>().inc.thisCardSel = true;
                             _cardOnHand[i].GetComponent<EnemyCard>().inc.target = _zone[zone];
                             cardPuted = true;
-                            _move++;
                             allBlood = false;
                             break;
                         }
@@ -98,7 +95,6 @@ public class EnemyAI : MonoBehaviour
                                 _cardOnHand[i].GetComponent<EnemyCard>().inc.blood--;
                                 _cardOnHand[i].GetComponent<EnemyCard>().inc.target = _zone[zone];
                                 cardPuted = true;
-                                _move++;
                                 allBlood = false;
                                 break;
                             }
@@ -133,11 +129,6 @@ public class EnemyAI : MonoBehaviour
         if (_cardOnHand.Length < 3)
         {
             GetCard();
-        }
-        if (_move >= 3)
-        {
-            StaticHolder.Move++;
-            StaticHolder.playerTurn = true;
         }
     }
     private void FirstMove()
