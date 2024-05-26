@@ -107,10 +107,10 @@ public class EnemyCard : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, -0.3285169f);
             _shifted = true;
         }
-        if (_shifted && StaticHolder.Move % 2 == 0 && _attack == false)
+        if (_shifted && StaticHolder.Move % 2 == 0 && _attack == false && StaticHolder.playerTurn == true)
         {
             RaycastHit hit;
-            Ray ray = new Ray(new Vector3(transform.position.x, 1.22f, transform.position.z), transform.up);
+            Ray ray = new Ray(new Vector3(transform.position.x, 1.221268f, transform.position.z), transform.up);
             Debug.DrawRay(transform.position, transform.up, Color.yellow, 0.3f);
             if (Physics.Raycast(ray, out hit, 0.3f))
             {
