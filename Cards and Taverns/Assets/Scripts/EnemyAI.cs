@@ -81,7 +81,7 @@ public class EnemyAI : MonoBehaviour
                     zone = Random.Range(0, _zone.Count);
                     for (int i = 0; i < _cardOnHand.Length; i++)
                     {
-                        if (_cardOnHand[i].GetComponent<EnemyCard>().inc.blood == 1 && _zone[zone].tag != "EnemyBusyZone" && _cardOnTable.Length > 0 && moveDone != 3)
+                        if (_cardOnHand[i].GetComponent<EnemyCard>().inc.blood == 1 && _zone[zone].tag != "EnemyBusyZone" && _cardOnTable.Length > 1 && moveDone != 3)
                         {
                             _cardOnHand[i].GetComponent<EnemyCard>().inc.thisCardSel = true;
                             if (_cardOnTable.Length > 0)
