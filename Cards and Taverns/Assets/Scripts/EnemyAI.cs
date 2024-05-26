@@ -68,7 +68,6 @@ public class EnemyAI : MonoBehaviour
                                 _cardOnHand[i].GetComponent<EnemyCard>().inc.target = _zone[zone];
                                 cardPuted = true;
                                 allBlood = false;
-                                moveDone++;
                                 break;
                             }
                             else
@@ -105,7 +104,6 @@ public class EnemyAI : MonoBehaviour
                                     _cardOnHand[i].GetComponent<EnemyCard>().inc.target = _zone[zone];
                                     cardPuted = true;
                                     allBlood = false;
-                                    moveDone++;
                                     break;
                                 }
                             }
@@ -143,7 +141,6 @@ public class EnemyAI : MonoBehaviour
                                 _cardOnHand[i].GetComponent<EnemyCard>().inc.target = _zone[zone];
                                 cardPuted = true;
                                 allBlood = false;
-                                moveDone++;
                                 break;
                             }
                             else
@@ -153,11 +150,6 @@ public class EnemyAI : MonoBehaviour
                         }
                         break;
                 }
-            if (moveDone == 3)
-            {
-                StaticHolder.Move++;
-                moveDone = 0;
-            }
             if (StaticHolder.Move == 1 && cardPuted == false && _firstMove == false)
             {
                 bool allCardBlood = true;

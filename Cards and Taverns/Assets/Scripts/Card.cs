@@ -120,7 +120,6 @@ public class Card : MonoBehaviour
         {
             RaycastHit hit;
             Ray ray = new Ray(new Vector3(transform.position.x, 1.217654f, transform.position.z), transform.up);
-            Debug.DrawRay(transform.position, transform.up, Color.yellow, 0.3f);
             if (Physics.Raycast(ray, out hit, 0.3f))
             {
                 if (hit.collider.CompareTag("EnemyCardPlayed"))

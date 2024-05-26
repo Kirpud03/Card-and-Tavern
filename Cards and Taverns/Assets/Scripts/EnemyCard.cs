@@ -110,11 +110,10 @@ public class EnemyCard : MonoBehaviour
         if (_shifted && StaticHolder.Move % 2 == 0 && _attack == false && StaticHolder.playerTurn == true)
         {
             RaycastHit hit;
-            Ray ray = new Ray(new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.up);
-            Debug.DrawRay(transform.position, transform.up, Color.yellow, 0.3f);
+            Ray ray = new Ray(new Vector3(transform.position.x, 1.221237f, transform.position.z), transform.up);
             if (Physics.Raycast(ray, out hit, 0.3f))
             {
-                if (hit.collider.CompareTag("EnemyCardPlayed"))
+                if (hit.collider.CompareTag("CardPuted"))
                 {
                     hit.collider.GetComponent<Card>().card._health = hit.collider.GetComponent<Card>().card._health - damage;
                     _attack = true;
