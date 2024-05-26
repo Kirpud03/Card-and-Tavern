@@ -26,6 +26,8 @@ public class EnemyAI : MonoBehaviour
     }
     private void Update()
     {
+        _cardOnTable = GameObject.FindGameObjectsWithTag("EnemyCardPlayed");
+        _cardOnHand = GameObject.FindGameObjectsWithTag("EnemyCard");
         if (_cardOnHand.Length == 7)
         {
             int cardToDestroy = Random.Range(0, _cardOnHand.Length);
@@ -45,8 +47,6 @@ public class EnemyAI : MonoBehaviour
         {
             _moveTake = true;
         }
-        _cardOnTable = GameObject.FindGameObjectsWithTag("EnemyCardPlayed");
-        _cardOnHand = GameObject.FindGameObjectsWithTag("EnemyCard");
         if (_canTake == false && StaticHolder.playerTurn == false)
         {
             _canTake = true;
