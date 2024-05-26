@@ -128,12 +128,12 @@ public class Card : MonoBehaviour
                     hit.collider.GetComponent<EnemyCard>().inc.health = hit.collider.GetComponent<EnemyCard>().inc.health - _damage;
                     _attack = true;
                 }
-                if (hit.collider.tag != "EnemyCardPlayed")
-                {
-                    StaticHolder.enHealth = StaticHolder.enHealth - _damage;
-                    _enemyHealth.text = StaticHolder.enHealth.ToString();
-                    _attack = true;
-                }
+            }
+            if (_attack == false)
+            {
+                StaticHolder.enHealth = StaticHolder.enHealth - _damage;
+                _enemyHealth.text = StaticHolder.enHealth.ToString();
+                _attack = true;
             }
         }
         if (_health <= 0)
