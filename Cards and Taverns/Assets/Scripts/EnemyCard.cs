@@ -109,15 +109,14 @@ public class EnemyCard : MonoBehaviour
         }
         if (_shifted && StaticHolder.Move % 2 == 0 && _attack == false && StaticHolder.playerTurn == true)
         {
-            RaycastHit hit;
-            Ray ray = new Ray(new Vector3(transform.position.x, 1.221268f, transform.position.z), transform.up);
-            Debug.DrawRay(transform.position, transform.up, Color.yellow, 0.3f);
-            if (Physics.Raycast(ray, out hit, 0.3f))
+            GameObject[] card = GameObject.FindGameObjectsWithTag("CardPuted");
+            for (int i = 0; i < card.Length; i++)
             {
-                if (hit.collider.CompareTag("CardPuted"))
+                if (card[i].transform.position.x == transform.position.x)
                 {
-                    hit.collider.GetComponent<Card>().card._health = hit.collider.GetComponent<Card>().card._health - damage;
+                    card[i].GetComponent<Card>().card._health = card[i].GetComponent<Card>().card._health - damage;
                     _attack = true;
+                    break;
                 }
             }
             if (_attack == false)

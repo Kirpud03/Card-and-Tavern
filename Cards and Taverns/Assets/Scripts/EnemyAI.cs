@@ -46,7 +46,7 @@ public class EnemyAI : MonoBehaviour
         }
         if (StaticHolder.playerTurn == false&&cardPuted==false&&StaticHolder.Move%2!=0)
         {
-            int move = Random.Range(0, 2);
+            int move = Random.Range(0, 3);
             switch (move)
             {
                 case 0:
@@ -104,7 +104,35 @@ public class EnemyAI : MonoBehaviour
                     {
                         GetCard();
                     }
-                    break;  
+                    break;
+                case 2:
+                    StaticHolder.switchCam = true;
+                    imin = 0;
+                    zone = Random.Range(0, _zone.Count);
+                    for (int i = 0; i < _cardOnHand.Length; i++)
+                    {
+                        if (_cardOnHand[i].GetComponent<EnemyCard>().inc.blood == 3 && _zone[zone].tag != "EnemyBusyZone" && _cardOnTable.Length > 4)
+                        {
+                            _cardOnHand[i].GetComponent<EnemyCard>().inc.thisCardSel = true;
+                            for (int c = 0; c < 3; c++)
+                            {
+                                for (int j = 1; j < _cardOnTable.Length; j++)
+                                {
+                                    if (_cardOnTable[j].GetComponent<EnemyCard>().inc.damage < _cardOnTable[imin].GetComponent<EnemyCard>().inc.damage)
+                                    {
+                                        imin = j;
+                                    }
+                                }
+                                Destroy(_cardOnTable[imin]);
+                                _cardOnHand[i].GetComponent<EnemyCard>().inc.blood--;
+                            }
+                            _cardOnHand[i].GetComponent<EnemyCard>().inc.target = _zone[zone];
+                            cardPuted = true;
+                            allBlood = false;
+                            break;
+                        }
+                    }
+                    break;
             }
             if (StaticHolder.Move == 1 && cardPuted == false && _firstMove == false)
             {

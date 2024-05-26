@@ -1892,7 +1892,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 1362903402}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -1914,8 +1914,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_Father: {fileID: 2013606069}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2799,6 +2799,11 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fc855889085700d46a45b25a17245a69, type: 3}
   m_PrefabInstance: {fileID: 246382824}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2013606069 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3343793597525589910, guid: e80c3b7d4b0a5174fa4faf34ea859ddc, type: 3}
+  m_PrefabInstance: {fileID: 3343793598215082722}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2037631524
 PrefabInstance:
