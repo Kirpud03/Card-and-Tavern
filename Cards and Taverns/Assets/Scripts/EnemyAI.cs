@@ -127,8 +127,8 @@ public class EnemyAI : MonoBehaviour
                                     }
                                 }
                                 Destroy(_cardOnTable[imin]);
-                                _cardOnHand[i].GetComponent<EnemyCard>().inc.blood--;
                             }
+                            _cardOnHand[i].GetComponent<EnemyCard>().inc.blood = _cardOnHand[i].GetComponent<EnemyCard>().inc.blood - 3;
                             _cardOnHand[i].GetComponent<EnemyCard>().inc.target = _zone[zone];
                             cardPuted = true;
                             allBlood = false;
@@ -141,6 +141,10 @@ public class EnemyAI : MonoBehaviour
             if (moveDone == 3)
             {
                 StaticHolder.Move++;
+            }
+            if (StaticHolder.Move % 2 == 0)
+            {
+                moveDone = 0;
             }
             if (StaticHolder.Move == 1 && cardPuted == false && _firstMove == false)
             {
