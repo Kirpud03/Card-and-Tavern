@@ -23,6 +23,7 @@ public class EnemyCard : MonoBehaviour
     private TMP_Text _playerHealth;
     private bool _shifted;
     private GameObject _hisZone;
+    private bool _attack;
     private void Awake()
     {
         inc = this;
@@ -105,6 +106,26 @@ public class EnemyCard : MonoBehaviour
             rb.isKinematic = true;
             transform.position = new Vector3(transform.position.x, transform.position.y, -0.3285169f);
             _shifted = true;
+        }
+        if (_shifted && StaticHolder.Move % 2 == 0 && _attack == false)
+        {
+            RaycastHit hit;
+            Ray ray = new Ray(new Vector3(transform.position.x, 1.22f, transform.position.z), transform.up);
+            Debug.DrawRay(transform.position, transform.up, Color.yellow, 0.3f);
+            if (Physics.Raycast(ray, out hit, 0.3f))
+            {
+                if (hit.collider.CompareTag("CardPuted"))
+                {
+                    hit.collider.GetComponent<Card>().card._health = hit.collider.GetComponent<Card>().card._health - damage;
+                    _attack = true;
+                }
+            }
+            if (_attack == false)
+            {
+                StaticHolder.plHealth = StaticHolder.plHealth - damage;
+                _playerHealth.text = StaticHolder.plHealth.ToString();
+                _attack = true;
+            }
         }
     }
     private void OnTriggerEnter(Collider col)

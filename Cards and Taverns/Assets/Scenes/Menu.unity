@@ -158,10 +158,10 @@ RectTransform:
   m_Father: {fileID: 946163785}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.11433351, y: 0.52282304}
-  m_AnchorMax: {x: 1, y: 0.64000005}
-  m_AnchoredPosition: {x: 7.065014, y: -268.72632}
-  m_SizeDelta: {x: 28.599976, y: 5.400009}
+  m_AnchorMin: {x: 0.11433351, y: 0.19151683}
+  m_AnchorMax: {x: 1, y: 0.3123469}
+  m_AnchoredPosition: {x: 7.0650177, y: 1.7736816}
+  m_SizeDelta: {x: 28.599976, y: 2.4000244}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3967463
 MonoBehaviour:
@@ -206,7 +206,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3967464}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1954116305}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_MethodName: Exit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3967464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -597,10 +609,10 @@ RectTransform:
   m_Father: {fileID: 946163785}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.11433351, y: 0.52282304}
-  m_AnchorMax: {x: 1, y: 0.64000005}
-  m_AnchoredPosition: {x: 7, y: -137}
-  m_SizeDelta: {x: 28.6, y: 5.4}
+  m_AnchorMin: {x: 0.11433351, y: 0.36600003}
+  m_AnchorMax: {x: 1, y: 0.47800002}
+  m_AnchoredPosition: {x: 7, y: -6}
+  m_SizeDelta: {x: 28.6, y: 9.399994}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &295993462
 MonoBehaviour:
@@ -645,7 +657,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 295993463}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1954116305}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_MethodName: SwitchInfoPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &295993463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -996,7 +1020,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 541806543}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1954116305}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_MethodName: LoadGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &541806543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1103,25 +1139,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: fc855889085700d46a45b25a17245a69, type: 3}
   m_PrefabInstance: {fileID: 596835697}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &596835700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 596835699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7d22cc4ea9d3df47ac8ba793027b891, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _hand: {fileID: 0}
-  _cards:
-  - {fileID: 537544217502684506, guid: 12f3f9a4fe2164e48b02ce32f67166c2, type: 3}
-  - {fileID: 537544217502684506, guid: 3c72ac0cfba6b93488e70b0b334333d0, type: 3}
-  - {fileID: 537544217502684506, guid: 62c82a13aaa2bad409e5b4b7a83d4aa3, type: 3}
-  - {fileID: 537544217502684506, guid: 48d52703f92ee9b4e94c8d449d9e2367, type: 3}
-  - {fileID: 537544217502684506, guid: 92ce31a8db271674da4bc528612dc5ed, type: 3}
 --- !u!64 &596835701
 MeshCollider:
   m_ObjectHideFlags: 0
