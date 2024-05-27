@@ -45,107 +45,42 @@ public class EnemyAI : MonoBehaviour
         {
             _canTake = true;
         }
-        if (StaticHolder.playerTurn == false&&cardPuted==false&&StaticHolder.Move%2!=0)
+        if (StaticHolder.playerTurn == false&&StaticHolder.Move%2!=0)
         {
-            int move = Random.Range(0, 3);
-                switch (move)
+            int zone = Random.Range(0, _cards.Count);
+            if (_zone[zone].tag != "Zone")
+            {
+                zone = Random.Range(0, _cards.Count);
+            }
+            for (int i = 0; i < _cardOnHand.Length; i++)
+            {
+                if (_cardOnHand[i].GetComponent<EnemyCard>().inc.blood == 0 && cardPuted == false && _cardOnHand.Length > 2)
                 {
-                    case 0:
-                        bool allBlood = false;
-                        int zone = Random.Range(0, _zone.Count);
-                        StaticHolder.switchCam = true;
-                        for (int i = 0; i < _cardOnHand.Length; i++)
-                        {
-                            if (_cardOnHand[i].GetComponent<EnemyCard>().inc.blood == 0 && _zone[zone].tag != "EnemyBusyZone" && moveDone != 3)
-                            {
-                                _cardOnHand[i].GetComponent<EnemyCard>().inc.thisCardSel = true;
-                                _cardOnHand[i].GetComponent<EnemyCard>().inc.target = _zone[zone];
-                                cardPuted = true;
-                                allBlood = false;
-                                break;
-                            }
-                            else
-                            {
-                                zone = Random.Range(0, _zone.Count);
-                                allBlood = true;
-                            }
-                        }
-                        if (allBlood)
-                        {
-                            GetCard();
-                        }
-                        break;
-                    case 1:
-                        StaticHolder.switchCam = true;
-                        int imin = 0;
-                        zone = Random.Range(0, _zone.Count);
-                        for (int i = 0; i < _cardOnHand.Length; i++)
-                        {
-                            if (_cardOnHand[i].GetComponent<EnemyCard>().inc.blood == 1 && _zone[zone].tag != "EnemyBusyZone" && _cardOnTable.Length > 1 && moveDone != 3)
-                            {
-                                _cardOnHand[i].GetComponent<EnemyCard>().inc.thisCardSel = true;
-                                if (_cardOnTable.Length > 0)
-                                {
-                                    for (int j = 1; j < _cardOnTable.Length; j++)
-                                    {
-                                        if (_cardOnTable[j].GetComponent<EnemyCard>().inc.damage < _cardOnTable[imin].GetComponent<EnemyCard>().inc.damage)
-                                        {
-                                            imin = j;
-                                        }
-                                    }
-                                _cardOnHand[imin].GetComponent<EnemyCard>().inc._hisZone.tag = "Zone";
-                                Destroy(_cardOnHand[imin]);
-                                    _cardOnHand[i].GetComponent<EnemyCard>().inc.blood--;
-                                    _cardOnHand[i].GetComponent<EnemyCard>().inc.target = _zone[zone];
-                                    cardPuted = true;
-                                    allBlood = false;
-                                    break;
-                                }
-                            }
-                            else
-                            {
-                                zone = Random.Range(0, _zone.Count);
-                            }
-                        }
-                        if (_cardOnHand.Length < 3)
-                        {
-                            GetCard();
-                        }
-                        break;
-                    case 2:
-                        StaticHolder.switchCam = true;
-                        imin = 0;
-                        zone = Random.Range(0, _zone.Count);
-                        for (int i = 0; i < _cardOnHand.Length; i++)
-                        {
-                            if (_cardOnHand[i].GetComponent<EnemyCard>().inc.blood == 3 && _zone[zone].tag != "EnemyBusyZone" && _cardOnTable.Length > 2 && moveDone != 3)
-                            {
-                                for (int c = 0; c < 3; c++)
-                                {
-                                    for (int j = 1; j < _cardOnTable.Length; j++)
-                                    {
-                                        if (_cardOnTable[j].GetComponent<EnemyCard>().inc.damage < _cardOnTable[imin].GetComponent<EnemyCard>().inc.damage)
-                                        {
-                                            imin = j;
-                                        }
-                                    }
-                                }
-                            _cardOnHand[imin].GetComponent<EnemyCard>().inc._hisZone.tag = "Zone";
-                            Destroy(_cardOnHand[imin]);
-                            _cardOnHand[i].GetComponent<EnemyCard>().inc.thisCardSel = true;
-                                _cardOnHand[i].GetComponent<EnemyCard>().inc.blood = _cardOnHand[i].GetComponent<EnemyCard>().inc.blood - 3;
-                                _cardOnHand[i].GetComponent<EnemyCard>().inc.target = _zone[zone];
-                                cardPuted = true;
-                                allBlood = false;
-                                break;
-                            }
-                            else
-                            {
-                                zone = Random.Range(0, _zone.Count);
-                            }
-                        }
-                        break;
+                    _cardOnHand[i].GetComponent<EnemyCard>().inc.thisCardSel = true;
+                    _cardOnHand[i].GetComponent<EnemyCard>().inc.target = _zone[zone];
+                    cardPuted = true;
                 }
+                if (_cardOnHand[i].GetComponent<EnemyCard>().inc.blood > 0 && cardPuted == false&&_cardOnHand.Length>2)
+                {
+                    int loop = _cardOnHand[i].GetComponent<EnemyCard>().inc.blood;
+                    for (int j = 0; j < loop; j++)
+                    {
+                        int imin = 0;
+                        for (int c = 0; c < _cardOnHand.Length; c++)
+                        {
+                            if (_cardOnTable[i].GetComponent<EnemyCard>().inc.damage < _cardOnTable[imin].GetComponent<EnemyCard>().inc.damage)
+                            {
+                                imin = c;
+                            }
+                        }
+                        _cardOnTable[imin].GetComponent<EnemyCard>().inc.destroyed = true;
+                        _cardOnHand[i].GetComponent<EnemyCard>().inc.blood--;
+                    }
+                    _cardOnHand[i].GetComponent<EnemyCard>().inc.thisCardSel = true;
+                    _cardOnHand[i].GetComponent<EnemyCard>().inc.target = _zone[zone];
+                    cardPuted = true;
+                }
+            }
             if (StaticHolder.Move == 1 && cardPuted == false && _firstMove == false)
             {
                 bool allCardBlood = true;
