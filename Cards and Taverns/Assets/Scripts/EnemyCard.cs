@@ -24,6 +24,7 @@ public class EnemyCard : MonoBehaviour
     private bool _shifted;
     private GameObject _hisZone;
     private bool _attack;
+    public bool destroyed;
     private void Awake()
     {
         inc = this;
@@ -95,6 +96,11 @@ public class EnemyCard : MonoBehaviour
             _hisZone.tag = "Zone";
             Destroy(gameObject);
         }
+        if (destroyed&&_cardPlayed)
+        {
+            _hisZone.tag = "Zone";
+            Destroy(gameObject);
+        }
         if (_shifted == false && _cardPlayed && StaticHolder.Move % 2 == 0)
         {
             Vector3 _direction = new Vector3(transform.position.x, transform.position.y, -0.3285169f) - transform.position;
@@ -111,7 +117,7 @@ public class EnemyCard : MonoBehaviour
         {
             RaycastHit hit;
             Ray ray = new Ray(new Vector3(transform.position.x, 1.221237f, transform.position.z), transform.up);
-            if (Physics.Raycast(ray, out hit, 0.3f))
+            if (Physics.Raycast(ray, out hit, 0.5f))
             {
                 if (hit.collider.CompareTag("CardPuted"))
                 {

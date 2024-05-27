@@ -28,18 +28,12 @@ public class EnemyAI : MonoBehaviour
     {
         _cardOnTable = GameObject.FindGameObjectsWithTag("EnemyCardPlayed");
         _cardOnHand = GameObject.FindGameObjectsWithTag("EnemyCard");
-        if (_cardOnHand.Length == 7)
-        {
-            int cardToDestroy = Random.Range(0, _cardOnHand.Length);
-            Destroy(_cardOnHand[cardToDestroy]);
-        }
         if (_moveTake == true && StaticHolder.Move % 2 != 0 && StaticHolder.Move != 1)
         {
             if (_cardOnHand.Length < 7 && _canTake == true)
             {
                 Instantiate(_cards[Random.Range(0, _cards.Count)], transform.position, Quaternion.Euler(15, 0, 0));
                 _canTake = false;
-                _firstMove = true;
             }
             _moveTake = false;
         }
@@ -99,7 +93,7 @@ public class EnemyAI : MonoBehaviour
                                             imin = j;
                                         }
                                     }
-                                    Destroy(_cardOnTable[imin]);
+                                    _cardOnHand[imin].GetComponent<EnemyCard>().inc.destroyed = true;
                                     _cardOnHand[i].GetComponent<EnemyCard>().inc.blood--;
                                     _cardOnHand[i].GetComponent<EnemyCard>().inc.target = _zone[zone];
                                     cardPuted = true;
@@ -121,22 +115,22 @@ public class EnemyAI : MonoBehaviour
                         StaticHolder.switchCam = true;
                         imin = 0;
                         zone = Random.Range(0, _zone.Count);
-                        for (int i = 0; i < _cardOnHand.Length; i++)
+                    for (int c = 0; c < 3; c++)
+                    {
+                        for (int j = 1; j < _cardOnTable.Length; j++)
+                        {
+                            if (_cardOnTable[j].GetComponent<EnemyCard>().inc.damage < _cardOnTable[imin].GetComponent<EnemyCard>().inc.damage)
+                            {
+                                imin = j;
+                            }
+                        }
+                        _cardOnHand[imin].GetComponent<EnemyCard>().inc.destroyed = true;
+                    }
+                    for (int i = 0; i < _cardOnHand.Length; i++)
                         {
                             if (_cardOnHand[i].GetComponent<EnemyCard>().inc.blood == 3 && _zone[zone].tag != "EnemyBusyZone" && _cardOnTable.Length > 2 && moveDone != 3)
                             {
                                 _cardOnHand[i].GetComponent<EnemyCard>().inc.thisCardSel = true;
-                                for (int c = 0; c < 3; c++)
-                                {
-                                    for (int j = 1; j < _cardOnTable.Length; j++)
-                                    {
-                                        if (_cardOnTable[j].GetComponent<EnemyCard>().inc.damage < _cardOnTable[imin].GetComponent<EnemyCard>().inc.damage)
-                                        {
-                                            imin = j;
-                                        }
-                                    }
-                                    Destroy(_cardOnTable[imin]);
-                                }
                                 _cardOnHand[i].GetComponent<EnemyCard>().inc.blood = _cardOnHand[i].GetComponent<EnemyCard>().inc.blood - 3;
                                 _cardOnHand[i].GetComponent<EnemyCard>().inc.target = _zone[zone];
                                 cardPuted = true;
@@ -147,7 +141,7 @@ public class EnemyAI : MonoBehaviour
                             {
                                 zone = Random.Range(0, _zone.Count);
                             }
-                        }
+                    }
                         break;
                 }
             if (StaticHolder.Move == 1 && cardPuted == false && _firstMove == false)
