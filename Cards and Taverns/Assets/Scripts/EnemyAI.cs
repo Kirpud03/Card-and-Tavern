@@ -115,21 +115,21 @@ public class EnemyAI : MonoBehaviour
                         StaticHolder.switchCam = true;
                         imin = 0;
                         zone = Random.Range(0, _zone.Count);
-                    for (int c = 0; c < 3; c++)
-                    {
-                        for (int j = 1; j < _cardOnTable.Length; j++)
-                        {
-                            if (_cardOnTable[j].GetComponent<EnemyCard>().inc.damage < _cardOnTable[imin].GetComponent<EnemyCard>().inc.damage)
-                            {
-                                imin = j;
-                            }
-                        }
-                        _cardOnHand[imin].GetComponent<EnemyCard>().inc.destroyed = true;
-                    }
                     for (int i = 0; i < _cardOnHand.Length; i++)
                         {
                             if (_cardOnHand[i].GetComponent<EnemyCard>().inc.blood == 3 && _zone[zone].tag != "EnemyBusyZone" && _cardOnTable.Length > 2 && moveDone != 3)
                             {
+                                for (int c = 0; c < 3; c++)
+                                {
+                                    for (int j = 1; j < _cardOnTable.Length; j++)
+                                    {
+                                        if (_cardOnTable[j].GetComponent<EnemyCard>().inc.damage < _cardOnTable[imin].GetComponent<EnemyCard>().inc.damage)
+                                        {
+                                            imin = j;
+                                        }
+                                    }
+                                    _cardOnHand[imin].GetComponent<EnemyCard>().inc.destroyed = true;
+                                }
                                 _cardOnHand[i].GetComponent<EnemyCard>().inc.thisCardSel = true;
                                 _cardOnHand[i].GetComponent<EnemyCard>().inc.blood = _cardOnHand[i].GetComponent<EnemyCard>().inc.blood - 3;
                                 _cardOnHand[i].GetComponent<EnemyCard>().inc.target = _zone[zone];
