@@ -93,7 +93,8 @@ public class EnemyAI : MonoBehaviour
                                             imin = j;
                                         }
                                     }
-                                    _cardOnHand[imin].GetComponent<EnemyCard>().inc.destroyed = true;
+                                _cardOnHand[imin].GetComponent<EnemyCard>().inc._hisZone.tag = "Zone";
+                                Destroy(_cardOnHand[imin]);
                                     _cardOnHand[i].GetComponent<EnemyCard>().inc.blood--;
                                     _cardOnHand[i].GetComponent<EnemyCard>().inc.target = _zone[zone];
                                     cardPuted = true;
@@ -115,7 +116,7 @@ public class EnemyAI : MonoBehaviour
                         StaticHolder.switchCam = true;
                         imin = 0;
                         zone = Random.Range(0, _zone.Count);
-                    for (int i = 0; i < _cardOnHand.Length; i++)
+                        for (int i = 0; i < _cardOnHand.Length; i++)
                         {
                             if (_cardOnHand[i].GetComponent<EnemyCard>().inc.blood == 3 && _zone[zone].tag != "EnemyBusyZone" && _cardOnTable.Length > 2 && moveDone != 3)
                             {
@@ -128,9 +129,10 @@ public class EnemyAI : MonoBehaviour
                                             imin = j;
                                         }
                                     }
-                                    _cardOnHand[imin].GetComponent<EnemyCard>().inc.destroyed = true;
                                 }
-                                _cardOnHand[i].GetComponent<EnemyCard>().inc.thisCardSel = true;
+                            _cardOnHand[imin].GetComponent<EnemyCard>().inc._hisZone.tag = "Zone";
+                            Destroy(_cardOnHand[imin]);
+                            _cardOnHand[i].GetComponent<EnemyCard>().inc.thisCardSel = true;
                                 _cardOnHand[i].GetComponent<EnemyCard>().inc.blood = _cardOnHand[i].GetComponent<EnemyCard>().inc.blood - 3;
                                 _cardOnHand[i].GetComponent<EnemyCard>().inc.target = _zone[zone];
                                 cardPuted = true;
@@ -141,7 +143,7 @@ public class EnemyAI : MonoBehaviour
                             {
                                 zone = Random.Range(0, _zone.Count);
                             }
-                    }
+                        }
                         break;
                 }
             if (StaticHolder.Move == 1 && cardPuted == false && _firstMove == false)
@@ -164,7 +166,7 @@ public class EnemyAI : MonoBehaviour
                 }
             }
         }
-        if (_cardOnHand.Length < 3)
+        if (_cardOnHand.Length == 2)
         {
             GetCard();
         }

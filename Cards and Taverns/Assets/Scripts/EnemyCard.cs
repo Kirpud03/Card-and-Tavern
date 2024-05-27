@@ -22,7 +22,7 @@ public class EnemyCard : MonoBehaviour
     public GameObject target;
     private TMP_Text _playerHealth;
     private bool _shifted;
-    private GameObject _hisZone;
+    public GameObject _hisZone;
     private bool _attack;
     public bool destroyed;
     private void Awake()
@@ -80,7 +80,7 @@ public class EnemyCard : MonoBehaviour
                     break;
             }
         }
-        if (target != null&&thisCardSel&&blood==0)
+        if (target != null&&thisCardSel&&blood==0&&_cardPlayed==false)
         {
             Vector3 _direction = target.transform.position - transform.position;
             rb.isKinematic = false;
@@ -93,10 +93,10 @@ public class EnemyCard : MonoBehaviour
         }
         if (health <= 0)
         {
-            _hisZone.tag = "Zone";
+            _hisZone .tag = "Zone";
             Destroy(gameObject);
         }
-        if (destroyed&&_cardPlayed)
+        if (destroyed)
         {
             _hisZone.tag = "Zone";
             Destroy(gameObject);
@@ -116,7 +116,7 @@ public class EnemyCard : MonoBehaviour
         if (_shifted && StaticHolder.Move % 2 == 0 && _attack == false && StaticHolder.playerTurn == true)
         {
             RaycastHit hit;
-            Ray ray = new Ray(new Vector3(transform.position.x, 1.221237f, transform.position.z), transform.up);
+            Ray ray = new Ray(new Vector3(transform.position.x, 1.22f, transform.position.z), transform.up);
             if (Physics.Raycast(ray, out hit, 0.5f))
             {
                 if (hit.collider.CompareTag("CardPuted"))
@@ -128,7 +128,7 @@ public class EnemyCard : MonoBehaviour
             if (_attack == false)
             {
                 StaticHolder.plHealth = StaticHolder.plHealth - damage;
-                _playerHealth.text = StaticHolder.enHealth.ToString();
+                _playerHealth.text = StaticHolder.plHealth.ToString();
                 _attack = true;
             }
         }
@@ -142,7 +142,7 @@ public class EnemyCard : MonoBehaviour
             gameObject.tag = "EnemyCardPlayed";
             gameObject.transform.rotation = Quaternion.Euler(-90, 0, 0);
             rb.isKinematic = true;
-            _hisZone = col.gameObject;
+            _hisZone = target;
             col.tag = "EnemyBusyZone";
             transform.position = target.transform.position;
             EnemyAI.cardNum[_num - 1] = 0;
