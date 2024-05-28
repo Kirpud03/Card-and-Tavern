@@ -43,7 +43,7 @@ public class EnemyAI : MonoBehaviour
         {
             _canTake = true;
         }
-        if (StaticHolder.playerTurn == false&&StaticHolder.Move%2!=0&&cardPuted == false&&StaticHolder.Move!=1)
+        if (StaticHolder.playerTurn == false&&StaticHolder.Move%2!=0&&cardPuted == false)
         {
             int zone = Random.Range(0, _cards.Count);
             if (_zone[zone].tag == "Zone")
@@ -51,13 +51,13 @@ public class EnemyAI : MonoBehaviour
                 for (int i = 0; i < _cardOnHand.Length; i++)
                 {
                     StaticHolder.switchCam = true;
-                    if (_cardOnHand[i].GetComponent<EnemyCard>().inc.blood == 0 && cardPuted == false && _cardOnHand.Length > 2 && _firstMove)
+                    if (_cardOnHand[i].GetComponent<EnemyCard>().inc.blood == 0 && cardPuted == false && _cardOnHand.Length > 2 && _firstMove && StaticHolder.Move != 1)
                     {
                         _cardOnHand[i].GetComponent<EnemyCard>().inc.thisCardSel = true;
                         _cardOnHand[i].GetComponent<EnemyCard>().inc.target = _zone[zone];
                         cardPuted = true;
                     }
-                    if (_cardOnHand[i].GetComponent<EnemyCard>().inc.blood == 1 && cardPuted == false && _cardOnTable.Length > 1 && _firstMove)
+                    if (_cardOnHand[i].GetComponent<EnemyCard>().inc.blood == 1 && cardPuted == false && _cardOnTable.Length > 1 && _firstMove && StaticHolder.Move != 1)
                     {
                         int imin = 0;
                         for (int c = 1; c < _cardOnTable.Length; c++)
@@ -76,7 +76,7 @@ public class EnemyAI : MonoBehaviour
                             cardPuted = true;
                         }
                     }
-                    if (_cardOnHand[i].GetComponent<EnemyCard>().inc.blood == 3 && cardPuted == false && _cardOnTable.Length > 2)
+                    if (_cardOnHand[i].GetComponent<EnemyCard>().inc.blood == 3 && cardPuted == false && _cardOnTable.Length > 2 && StaticHolder.Move != 1)
                     {
                         int imin = 0;
                         bool lessBlood = false;
