@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -44,7 +43,7 @@ public class EnemyAI : MonoBehaviour
         {
             _canTake = true;
         }
-        if (StaticHolder.playerTurn == false&&StaticHolder.Move%2!=0&&cardPuted == false)
+        if (StaticHolder.playerTurn == false&&StaticHolder.Move%2!=0&&cardPuted == false&&StaticHolder.Move!=1)
         {
             int zone = Random.Range(0, _cards.Count);
             if (_zone[zone].tag == "Zone")
@@ -108,6 +107,11 @@ public class EnemyAI : MonoBehaviour
                             _cardOnHand[i].GetComponent<EnemyCard>().inc.target = _zone[zone];
                             cardPuted = true;
                         }
+                    }
+                    if (i + 1 == _cardOnHand.Length)
+                    {
+                        StaticHolder.Move++;
+                        StaticHolder.switchCam = false;
                     }
                 }
             }
