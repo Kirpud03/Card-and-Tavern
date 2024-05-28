@@ -101,24 +101,28 @@ public class EnemyCard : MonoBehaviour
             _hisZone.tag = "Zone";
             Destroy(gameObject);
         }
+        if (StaticHolder.playerTurn == false&&_shifted)
+        {
+            _attack = false;
+        }
         if (_shifted == false && _cardPlayed && StaticHolder.Move % 2 == 0)
         {
             Vector3 _direction = new Vector3(transform.position.x, transform.position.y, -0.3285169f) - transform.position;
             rb.isKinematic = false;
             rb.velocity = _direction * 1.5f;
         }
-        if (_cardPlayed && StaticHolder.Move % 2 == 0 && transform.position.z == -0.3285169f)
+        if (_cardPlayed && transform.position.z <= -0.32)
         {
             rb.isKinematic = true;
             transform.position = new Vector3(transform.position.x, transform.position.y, -0.3285169f);
             _shifted = true;
             _attack = true;
         }
-        if (_shifted == true && StaticHolder.playerTurn && _attack == false)
+        if (_shifted && StaticHolder.playerTurn && _attack == false)
         {
             RaycastHit hit;
-            Ray ray = new Ray(new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.up);
-            if (Physics.Raycast(ray, out hit, 0.5f))
+            Ray ray = new Ray(new Vector3(transform.position.x, 1.22f, transform.position.z), transform.up);
+            if (Physics.Raycast(ray, out hit, 0.3f))
             {
                 if (hit.collider.CompareTag("CardPuted"))
                 {

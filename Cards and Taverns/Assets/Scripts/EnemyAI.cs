@@ -49,6 +49,19 @@ public class EnemyAI : MonoBehaviour
         }
         if (StaticHolder.playerTurn == false && StaticHolder.Move%2 != 0 && cardPuted == false && StaticHolder.Move != 1)
         {
+            bool allBusy = true;
+            for (int g = 0; g < _zone.Count; g++)
+            {
+                if (_zone[g].tag == "Zone")
+                {
+                    allBusy = false;
+                    break;
+                }
+            }
+            if (allBusy)
+            {
+                StaticHolder.Move++;
+            }
             int zone = Random.Range(0, _cards.Count);
             if (_zone[zone].tag == "Zone")
             {
@@ -61,7 +74,7 @@ public class EnemyAI : MonoBehaviour
                         _cardOnHand[i].GetComponent<EnemyCard>().inc.target = _zone[zone];
                         cardPuted = true;
                     }
-                    if (_cardOnHand[i].GetComponent<EnemyCard>().inc.blood == 1 && cardPuted == false && _cardOnTable.Length > 1 )
+                    if (_cardOnHand[i].GetComponent<EnemyCard>().inc.blood == 1 && cardPuted == false && _cardOnTable.Length > 0)
                     {
                         int imin = 0;
                         for (int c = 1; c < _cardOnTable.Length; c++)

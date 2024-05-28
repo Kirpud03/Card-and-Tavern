@@ -24,7 +24,7 @@ public class GetCard : MonoBehaviour
         {
             FirstGive();
         }
-        if (StaticHolder.Move % 2 == 0 && _moveTake == true && StaticHolder.Move != 1)
+        if (StaticHolder.Move % 2 == 0 && _moveTake == true && StaticHolder.Move != 2)
         {
             _cardNum = Random.Range(0, 5);
             if (StaticHolder.cardsOnHand < 7 && StaticHolder.canTake == true && StaticHolder.putCard == false && StaticHolder.playerTurn)
