@@ -119,7 +119,7 @@ public class EnemyCard : MonoBehaviour
         {
             RaycastHit hit;
             Ray ray = new Ray(new Vector3(transform.position.x, 1.22f, transform.position.z), transform.up);
-            if (Physics.Raycast(ray, out hit, 0.2f))
+            if (Physics.Raycast(ray, out hit, 0.5f))
             {
                 if (hit.collider.CompareTag("CardPuted"))
                 {
@@ -139,16 +139,16 @@ public class EnemyCard : MonoBehaviour
     {
         if (col.gameObject.tag == "Zone"&&_cardPlayed==false)
         {
+            _hisZone = target;
+            _hisZone.tag = "EnemyBusyZone";
+            EnemyAI.cardPuted = false;
             StaticHolder.switchCam = false;
             thisCardSel = false;
             gameObject.tag = "EnemyCardPlayed";
             gameObject.transform.rotation = Quaternion.Euler(-90, 0, 0);
             rb.isKinematic = true;
-            _hisZone = target;
-            _hisZone.tag = "EnemyBusyZone";
             transform.position = target.transform.position;
             EnemyAI.cardNum[_num - 1] = 0;
-            EnemyAI.cardPuted = false;
             _cardPlayed = true;
             if (StaticHolder.Move == 1)
             {
