@@ -107,17 +107,17 @@ public class EnemyCard : MonoBehaviour
             rb.isKinematic = false;
             rb.velocity = _direction * 1.5f;
         }
-        if (_shifted == false && _cardPlayed && StaticHolder.Move % 2 == 0 && transform.position.z == -0.3285169f)
+        if (_cardPlayed && StaticHolder.Move % 2 == 0 && transform.position.z == -0.3285169f)
         {
             rb.isKinematic = true;
             transform.position = new Vector3(transform.position.x, transform.position.y, -0.3285169f);
             _shifted = true;
             _attack = true;
         }
-        if (_shifted == true && StaticHolder.Move % 2 == 0 && _attack == false)
+        if (_shifted == true && StaticHolder.playerTurn && _attack == false)
         {
             RaycastHit hit;
-            Ray ray = new Ray(new Vector3(transform.position.x, 1.22f, transform.position.z), transform.up);
+            Ray ray = new Ray(new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.up);
             if (Physics.Raycast(ray, out hit, 0.5f))
             {
                 if (hit.collider.CompareTag("CardPuted"))
@@ -149,11 +149,6 @@ public class EnemyCard : MonoBehaviour
             transform.position = target.transform.position;
             EnemyAI.cardNum[_num - 1] = 0;
             _cardPlayed = true;
-            if (StaticHolder.Move == 1)
-            {
-                StaticHolder.Move++;
-                StaticHolder.playerTurn = true;
-            }
         }
     }
 }
