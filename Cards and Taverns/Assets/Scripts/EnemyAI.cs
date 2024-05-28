@@ -48,33 +48,20 @@ public class EnemyAI : MonoBehaviour
             _canTake = true;
         }
         if (StaticHolder.playerTurn == false && StaticHolder.Move%2 != 0 && cardPuted == false && StaticHolder.Move != 1)
-        {
-            bool allBusy = true;
-            for (int g = 0; g < _zone.Count; g++)
-            {
-                if (_zone[g].tag == "Zone")
-                {
-                    allBusy = false;
-                    break;
-                }
-            }
-            if (allBusy)
-            {
-                StaticHolder.Move++;
-            }
-            int zone = Random.Range(0, _cards.Count);
+        { 
+            int zone = Random.Range(0, 5);
             if (_zone[zone].tag == "Zone")
             {
                 for (int i = 0; i < _cardOnHand.Length; i++)
                 {
                     StaticHolder.switchCam = true;
-                    if (_cardOnHand[i].GetComponent<EnemyCard>().inc.blood == 0 && cardPuted == false)
+                    if (_cardOnHand[i].GetComponent<EnemyCard>().inc.blood == 0 && cardPuted == false && StaticHolder.playerTurn == false)
                     {
                         _cardOnHand[i].GetComponent<EnemyCard>().inc.thisCardSel = true;
                         _cardOnHand[i].GetComponent<EnemyCard>().inc.target = _zone[zone];
                         cardPuted = true;
                     }
-                    if (_cardOnHand[i].GetComponent<EnemyCard>().inc.blood == 1 && cardPuted == false && _cardOnTable.Length > 0)
+                    if (_cardOnHand[i].GetComponent<EnemyCard>().inc.blood == 1 && cardPuted == false && _cardOnTable.Length > 0 && StaticHolder.playerTurn == false)
                     {
                         int imin = 0;
                         for (int c = 1; c < _cardOnTable.Length; c++)
@@ -150,12 +137,6 @@ public class EnemyAI : MonoBehaviour
             StaticHolder.switchCam = false;
             _canTake = false;
             _firstMove = true;
-        }
-        else
-        {
-            StaticHolder.Move++;
-            StaticHolder.switchCam = false;
-            StaticHolder.playerTurn = true;
         }
     }
     private void FirstGiveEn()

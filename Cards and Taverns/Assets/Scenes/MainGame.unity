@@ -2019,7 +2019,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cards:
-  - {fileID: 537544217502684506, guid: 405ed0806e6a9914090202260a6afa81, type: 3}
   - {fileID: 537544217502684506, guid: 924d0109d5444ea4ca1c81850ca646b9, type: 3}
   - {fileID: 537544217502684506, guid: d47c3f7a069ec2e4d9b9204f338c28a1, type: 3}
   - {fileID: 537544217502684506, guid: da5218c5d45a9f6418ec7411c3751b94, type: 3}

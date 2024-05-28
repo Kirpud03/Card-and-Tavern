@@ -101,7 +101,7 @@ public class EnemyCard : MonoBehaviour
             _hisZone.tag = "Zone";
             Destroy(gameObject);
         }
-        if (StaticHolder.playerTurn == false&&_shifted)
+        if (StaticHolder.playerTurn == false)
         {
             _attack = false;
         }
@@ -118,10 +118,10 @@ public class EnemyCard : MonoBehaviour
             _shifted = true;
             _attack = true;
         }
-        if (_shifted && StaticHolder.playerTurn && _attack == false)
+        if (StaticHolder.playerTurn && _attack == false)
         {
             RaycastHit hit;
-            Ray ray = new Ray(new Vector3(transform.position.x, 1.221318f, transform.position.z), -transform.up);
+            Ray ray = new Ray(new Vector3(transform.position.x, 1.221318f, transform.position.z), transform.up);
             if (Physics.Raycast(ray, out hit, 0.3f))
             {
                 if (hit.collider.CompareTag("CardPuted"))

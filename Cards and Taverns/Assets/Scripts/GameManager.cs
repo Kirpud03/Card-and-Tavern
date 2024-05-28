@@ -32,12 +32,10 @@ public class GameManager : MonoBehaviour
         if (StaticHolder.Move % 2 == 0)
         {
             StaticHolder.playerTurn = true;
-            Debug.Log(StaticHolder.Move);
         }
         else if (StaticHolder.Move % 2 != 0)
         {
             StaticHolder.playerTurn = false;
-            Debug.Log(StaticHolder.Move);
         }
     }
 }
