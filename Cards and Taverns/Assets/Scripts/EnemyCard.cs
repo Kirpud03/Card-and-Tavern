@@ -121,7 +121,7 @@ public class EnemyCard : MonoBehaviour
         if (_shifted && StaticHolder.playerTurn && _attack == false)
         {
             RaycastHit hit;
-            Ray ray = new Ray(new Vector3(transform.position.x, 1.22f, transform.position.z), transform.up);
+            Ray ray = new Ray(new Vector3(transform.position.x, 1.221318f, transform.position.z), -transform.up);
             if (Physics.Raycast(ray, out hit, 0.3f))
             {
                 if (hit.collider.CompareTag("CardPuted"))
