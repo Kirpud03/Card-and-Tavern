@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEditorInternal;
 
 public class EnemyCard : MonoBehaviour
 {
@@ -101,7 +102,7 @@ public class EnemyCard : MonoBehaviour
             _hisZone.tag = "Zone";
             Destroy(gameObject);
         }
-        if (StaticHolder.playerTurn == false)
+        if (StaticHolder.Move % 2 != 0 && _attack)
         {
             _attack = false;
         }
@@ -120,7 +121,7 @@ public class EnemyCard : MonoBehaviour
             _attack = true;
             sn = true;
         }
-        if (StaticHolder.Move % 2 == 0 && _attack == false && _cardPlayed && transform.position.z == -0.3285169f)
+        if (StaticHolder.Move % 2 == 0 && _attack == false && _cardPlayed)
         {
             RaycastHit hit;
             Ray ray = new Ray(new Vector3(transform.position.x, 1.221318f, transform.position.z), transform.up);
