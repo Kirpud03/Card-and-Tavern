@@ -91,11 +91,13 @@ public class GameManager : MonoBehaviour
     public void MenuButton()
     {
         Time.timeScale = 1;
+        _pause = false;
         SceneManager.LoadScene(0);
     }
     public void RestartButton()
     {
         Time.timeScale = 1;
+        _pause = false;
         SceneManager.LoadScene(1);
     }
 }
