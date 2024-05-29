@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
@@ -30,6 +31,29 @@ public class EnemyAI : MonoBehaviour
         {
             StaticHolder.Move++;
         }
+        bool find = false;
+        bool allBusy = true;
+        if (StaticHolder.Move % 2 != 0 && find == false)
+        {
+            for (int y = 0; y < _zone.Count; y++)
+            {
+                if (_zone[y].tag == "Zone")
+                {
+                    find = true;
+                    allBusy = false;
+                    break;
+                }
+            }
+            if(allBusy && StaticHolder.Move % 2 != 0)
+            {
+                find = true;
+                StaticHolder.Move++;
+            }
+        }
+        if (StaticHolder.Move % 2 == 0)
+        {
+            find = false;
+        }
         if (_moveTake == true && StaticHolder.Move % 2 != 0 && StaticHolder.Move != 1)
         {
             if (_cardOnHand.Length < 7)
@@ -48,7 +72,7 @@ public class EnemyAI : MonoBehaviour
             _canTake = true;
         }
         if (StaticHolder.playerTurn == false && StaticHolder.Move%2 != 0 && cardPuted == false && StaticHolder.Move != 1)
-        { 
+        {
             int zone = Random.Range(0, 5);
             if (_zone[zone].tag == "Zone")
             {
@@ -84,7 +108,7 @@ public class EnemyAI : MonoBehaviour
             }
             else
             {
-                zone = Random.Range(0, _zone.Count);
+                zone = Random.Range(0,_zone.Count);
             }
         }
         if (StaticHolder.Move == 1 && cardPuted == false && _firstMove == false)

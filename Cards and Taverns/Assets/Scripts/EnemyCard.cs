@@ -21,7 +21,7 @@ public class EnemyCard : MonoBehaviour
     [HideInInspector]
     public GameObject target;
     private TMP_Text _playerHealth;
-    private bool _shifted;
+    public bool _shifted;
     public GameObject _hisZone;
     private bool _attack;
     public bool destroyed;
@@ -111,14 +111,16 @@ public class EnemyCard : MonoBehaviour
             rb.isKinematic = false;
             rb.velocity = _direction * 1.5f;
         }
-        if (_cardPlayed && transform.position.z <= -0.32)
+        bool sn = false;
+        if (_cardPlayed && transform.position.z <= -0.32 && sn == false)
         {
             rb.isKinematic = true;
             transform.position = new Vector3(transform.position.x, transform.position.y, -0.3285169f);
             _shifted = true;
             _attack = true;
+            sn = true;
         }
-        if (StaticHolder.playerTurn && _attack == false)
+        if (StaticHolder.Move % 2 == 0 && _attack == false && _cardPlayed && transform.position.z == -0.3285169f)
         {
             RaycastHit hit;
             Ray ray = new Ray(new Vector3(transform.position.x, 1.221318f, transform.position.z), transform.up);

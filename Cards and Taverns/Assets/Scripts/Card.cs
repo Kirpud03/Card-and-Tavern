@@ -137,16 +137,7 @@ public class Card : MonoBehaviour
         }
         if (_health <= 0)
         {
-            GameObject[] zone = GameObject.FindGameObjectsWithTag("PlayerBusyZone");
-            for (int i = 0; i < zone.Length; i++)
-            {
-                if (zone[i].transform.position.x == transform.position.x && zone[i].transform.position.z == transform.position.z)
-                {
-                    zone[i].tag = "Zone";
-                    Destroy(gameObject);
-                    break;
-                }
-            }
+            Destroy(gameObject);
         }
     }
     private void LessBlood()
