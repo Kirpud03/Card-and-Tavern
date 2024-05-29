@@ -47,7 +47,7 @@ public class EnemyAI : MonoBehaviour
             if(allBusy && StaticHolder.Move % 2 != 0)
             {
                 find = true;
-                StaticHolder.Move++;
+                Invoke("AllBusy", 3f);
             }
         }
         if (StaticHolder.Move % 2 == 0)
@@ -134,6 +134,10 @@ public class EnemyAI : MonoBehaviour
         {
             GetCard();
         }
+    }
+    private void AllBusy()
+    {
+        StaticHolder.Move++;
     }
     private void FirstMove()
     {
