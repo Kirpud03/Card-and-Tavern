@@ -118,14 +118,13 @@ public class EnemyCard : MonoBehaviour
             rb.isKinematic = true;
             transform.position = new Vector3(transform.position.x, transform.position.y, -0.3285169f);
             _shifted = true;
-            _attack = true;
             sn = true;
         }
         if (StaticHolder.Move % 2 == 0 && _attack == false && _cardPlayed)
         {
             RaycastHit hit;
             Ray ray = new Ray(new Vector3(transform.position.x, 1.221318f, transform.position.z), transform.up);
-            if (Physics.Raycast(ray, out hit, 0.3f))
+            if (Physics.Raycast(ray, out hit, 5))
             {
                 if (hit.collider.CompareTag("CardPuted"))
                 {
